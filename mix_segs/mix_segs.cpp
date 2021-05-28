@@ -220,6 +220,7 @@ struct SegmentMetaMultiLevel : public SegmentMeta
 		}
 
 		poOutputDS->RasterIO(GF_Write, 0, 0, nWidth, nHeight, panOutputPixels, nWidth, nHeight, GDT_UInt32, 1, 0, 0, 0, 0, 0);
+		
 
 		delete[]panOutputPixels;
 		return true;
@@ -534,6 +535,7 @@ int main(int nArgs, char* argv[])
 	}
 
 	bool bResult = oSegMultiLevel.SaveOutput(poOutputDS, nWidth, nHeight, vectSegPixels);
+	GDALClose(poOutputDS);
 	end = std::chrono::steady_clock::now();
 	std::cout << "done in "
 		<< std::chrono::duration_cast<std::chrono::seconds>(end - begin).count() << "s" << std::endl;
